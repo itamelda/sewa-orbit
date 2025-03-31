@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sewa Orbit di GraPARI</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 500px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            font-weight: bold;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Sewa Orbit di GraPARI</h2>
+        <form id="sewaForm">
+            <label for="nama">Nama:</label>
+            <input type="text" id="nama" required>
+
+            <label for="nohp">No. HP:</label>
+            <input type="tel" id="nohp" required>
+
+            <label for="durasi">Durasi Sewa:</label>
+            <select id="durasi">
+                <option value="1 Hari">1 Hari</option>
+                <option value="1 Minggu">1 Minggu</option>
+                <option value="1 Bulan">1 Bulan</option>
+            </select>
+
+            <label for="metode">Metode Pembayaran:</label>
+            <select id="metode">
+                <option value="Tunai">Tunai</option>
+                <option value="Transfer Bank">Transfer Bank</option>
+                <option value="E-Wallet">E-Wallet</option>
+            </select>
+
+            <button type="button" onclick="kirimData()">Kirim</button>
+        </form>
+        <p id="hasil" style="font-weight:bold; color:green;"></p>
+    </div>
+
+    <script>
+        function kirimData() {
+            let nama = document.getElementById("nama").value;
+            let nohp = document.getElementById("nohp").value;
+            let durasi = document.getElementById("durasi").value;
+            let metode = document.getElementById("metode").value;
+
+            if (nama && nohp) {
+                document.getElementById("hasil").innerText = `Terima kasih, ${nama}! Anda telah memilih sewa Orbit selama ${durasi}.`;
+            } else {
+                alert("Harap isi semua data terlebih dahulu.");
+            }
+        }
+    </script>
+</body>
+</html>
