@@ -18,7 +18,7 @@
             margin-top: 50px;
         }
         .logo {
-            width: 100px; /* Sesuaikan ukuran logo */
+            width: 100px;
             display: block;
             margin: 0 auto 20px auto;
         }
@@ -26,6 +26,7 @@
 </head>
 <body>
     <div class="container">
+        <img src="URL_LOGO_ANDA" alt="Logo Sewa Orbit" class="logo">
         <h2 class="text-center">Sewa Orbit</h2>
         <form id="sewaForm">
             <div class="mb-3">
@@ -99,18 +100,34 @@
                 <label class="form-label">Estimasi Biaya:</label>
                 <input type="text" id="estimasiBiaya" class="form-control" disabled>
             </div>
+            <!-- Kolom Jaminan -->
+            <div class="mb-3">
+                <label for="jaminan" class="form-label">Jaminan:</label>
+                <select id="jaminan" class="form-select" required>
+                    <option value="">Pilih Jaminan</option>
+                    <option value="Deposit Uang">Deposit Uang</option>
+                    <option value="Dokumen Identitas">Dokumen Identitas</option>
+                </select>
+            </div>
+            <!-- Upload KTP, Selfie dan Tanda Tangan -->
+            <div class="mb-3">
+                <label for="uploadKTP" class="form-label">Unggah KTP:</label>
+                <input type="file" id="uploadKTP" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="uploadSelfie" class="form-label">Unggah Foto Selfie dengan KTP:</label>
+                <input type="file" id="uploadSelfie" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="tandaTangan" class="form-label">Tanda Tangan Digital:</label>
+                <input type="file" id="tandaTangan" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <input type="checkbox" id="syaratKetentuan" required>
+                <label for="syaratKetentuan">Saya menyetujui <a href="#">Syarat & Ketentuan</a></label>
+            </div>
             <button type="button" class="btn btn-primary w-100" onclick="kirimData()">Kirim</button>
         </form>
-
-        <hr>
-        <div class="text-center">
-            <a href="https://wa.me/6281235628878" class="btn btn-info w-100" target="_blank">Live Chat Support</a>
-        </div>
-        <hr>
-        <p><strong>Syarat & Ketentuan:</strong></p>
-        <p>1. Penyewa harus berusia minimal 18 tahun.</p>
-        <p>2. Biaya sewa tidak dapat dikembalikan setelah pembayaran.</p>
-        <p>3. Denda berlaku jika perangkat tidak dikembalikan tepat waktu.</p>
     </div>
 
     <script>
@@ -128,13 +145,12 @@
             let biaya = 0;
 
             if (durasi && lokasi && jenisOrbit && kuota) {
-                // Biaya dasar lebih murah
-                if (lokasi === "indonesia") biaya = 10000;  // Biaya Indonesia lebih murah
-                if (lokasi === "luar-negeri") biaya = 20000;  // Biaya Luar Negeri lebih murah
+                if (lokasi === "indonesia") biaya = 20000;
+                if (lokasi === "luar-negeri") biaya = 50000;
 
-                if (jenisOrbit === "Orbit Pro") biaya += 10000;  // Biaya tambahan Orbit Pro lebih murah
-                if (kuota === "30GB") biaya += 15000;  // Biaya tambahan kuota 30GB lebih murah
-                if (kuota === "50GB") biaya += 25000;  // Biaya tambahan kuota 50GB lebih murah
+                if (jenisOrbit === "Orbit Pro") biaya += 20000;
+                if (kuota === "30GB") biaya += 30000;
+                if (kuota === "50GB") biaya += 50000;
 
                 if (durasi === "1 Minggu") biaya *= 7;
                 if (durasi === "1 Bulan") biaya *= 30;
@@ -143,7 +159,8 @@
         }
 
         function kirimData() {
-            alert("Data berhasil dikirim. Terima kasih!");
+            // Fungsi untuk mengirimkan data ke server atau database
+            alert("Data telah terkirim!");
         }
     </script>
 </body>
