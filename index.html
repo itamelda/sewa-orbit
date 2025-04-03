@@ -64,7 +64,7 @@
             <div id="lokasiIndonesia" style="display: none;">
                 <!-- Kota untuk Indonesia -->
                 <div class="mb-3">
-                    <label for="kota" class="form-label">Kota:</label>
+                    <label for="alamatlengkap" class="form-label">Alamat Lengkap:</label>
                     <input type="text" id="kota" class="form-control">
                 </div>
             </div>
@@ -75,17 +75,25 @@
                     <label for="negara" class="form-label">Negara Tujuan:</label>
                     <select id="negara" class="form-select" required onchange="hitungBiaya()">
                         <option value="">Pilih Negara Tujuan</option>
-                        <option value="USA">USA</option>
-                        <option value="UK">UK</option>
+                        <option value="Amerika Serikat">merika Serikat</option>
+                        <option value="Afghanistan">Afghanistan</option>
+                        <option value="Australia">Australia</option>
                         <option value="Germany">Germany</option>
                         <option value="France">France</option>
                         <option value="Italy">Italy</option>
                         <option value="Spain">Spain</option>
+                        <option value="Sweden">Sweden</option>
+                        <option value="Norway">Norway</option>
+                        <option value="Belgium">Belgium</option>
                         <option value="Japan">Japan</option>
                         <option value="China">China</option>
                         <option value="South Korea">South Korea</option>
                         <option value="India">India</option>
                         <option value="Singapore">Singapore</option>
+                        <option value="Malaysia">Malaysia</option>
+                        <option value="Thailand">Thailand</option>
+                        <option value="Philippines">Philippines</option>
+                        <option value="Vietnam">Vietnam</option>
                     </select>
                 </div>
             </div>
@@ -120,7 +128,9 @@
             <!-- Jaminan -->
             <div class="mb-3">
                 <label for="jaminan" class="form-label">Jaminan:</label>
-                <input type="text" id="jaminan" class="form-control">
+                <select id="jaminan" class="form-select" required>
+                    <option value="">Pilih Jaminan</option>
+                    <option value="Deposit Uang">Deposit Uang</option>
             </div>
 
             <!-- Upload Dokumen -->
@@ -217,7 +227,7 @@
                 estimasiBiaya: estimasiBiaya
             };
 
-            fetch("https://script.google.com/macros/s/AKfycbzj9_1EnRxsBH8SJ8isAKBye_TaHFqFamI7wjeHkH0KtKj-tYrl0ZJFSiwNC8l77V36/exec", {
+            fetch('https://script.google.com/macros/s/AKfycbzj9_1EnRxsBH8SJ8isAKBye_TaHFqFamI7wjeHkH0KtKj-tYrl0ZJFSiwNC8l77V36/exec', {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
