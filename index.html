@@ -8,7 +8,6 @@
     <style>
         body {
             background-color: #f8f9fa;
-            font-family: Arial, sans-serif;
         }
         .container {
             max-width: 600px;
@@ -17,17 +16,19 @@
             border-radius: 10px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
             margin-top: 50px;
-            text-align: center;
         }
         .logo {
-            width: 150px;
-            margin-bottom: 20px;
+            width: 100px; /* Sesuaikan ukuran logo */
+            display: block;
+            margin: 0 auto 20px auto;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/4/48/Telkomsel_Orbit_logo.png" alt="Telkomsel Orbit" class="logo">
+        <!-- Logo -->
+        <img src="URL_LOGO_ANDA" alt="Logo Sewa Orbit" class="logo">
+
         <h2 class="text-center">Sewa Orbit</h2>
         <form id="sewaForm">
             <div class="mb-3">
@@ -63,11 +64,123 @@
             </div>
             <div id="lokasiLuarNegeri" style="display: none;">
                 <div class="mb-3">
-                    <label for="benua" class="form-label">Benua:</label>
-                    <select id="benua" class="form-select" required onchange="updateNegara()">
-                        <option value="">Pilih Benua</option>
-                        <option value="Asia">Asia</option>
-                        <option value="Eropa">Eropa</option>
-                        <option value="Amerika">Amerika</option>
-                        <option value="Australia">Australia</option>
-                        <
+                    <label for="negara" class="form-label">Negara Tujuan:</label>
+                    <select id="negara" class="form-select" required onchange="hitungBiaya()">
+                        <option value="">Pilih Negara Tujuan</option>
+                        <option value="USA">USA</option>
+                        <option value="UK">UK</option>
+                        <option value="Germany">Germany</option>
+                        <option value="France">France</option>
+                        <option value="Italy">Italy</option>
+                        <option value="Spain">Spain</option>
+                        <option value="Netherlands">Netherlands</option>
+                        <option value="Sweden">Sweden</option>
+                        <option value="Norway">Norway</option>
+                        <option value="Belgium">Belgium</option>
+                        <option value="Japan">Japan</option>
+                        <option value="China">China</option>
+                        <option value="South Korea">South Korea</option>
+                        <option value="India">India</option>
+                        <option value="Singapore">Singapore</option>
+                        <option value="Malaysia">Malaysia</option>
+                        <option value="Thailand">Thailand</option>
+                        <option value="Indonesia">Indonesia</option>
+                        <option value="Philippines">Philippines</option>
+                        <option value="Vietnam">Vietnam</option>
+                    </select>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="jenisOrbit" class="form-label">Jenis Orbit:</label>
+                <select id="jenisOrbit" class="form-select" required onchange="hitungBiaya()">
+                    <option value="">Pilih Jenis Orbit</option>
+                    <option value="Orbit Star">Orbit Star</option>
+                    <option value="Orbit Pro">Orbit Pro</option>
+                </select>
+            </div>
+            <!-- Pilihan kuota -->
+            <div class="mb-3">
+                <label for="kuota" class="form-label">Pilih Kuota:</label>
+                <select id="kuota" class="form-select" required onchange="hitungBiaya()">
+                    <option value="">Pilih Kuota</option>
+                    <option value="10GB">10GB</option>
+                    <option value="30GB">30GB</option>
+                    <option value="50GB">50GB</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Estimasi Biaya:</label>
+                <input type="text" id="estimasiBiaya" class="form-control" disabled>
+            </div>
+            <div class="mb-3">
+                <label for="jaminan" class="form-label">Jaminan:</label>
+                <select id="jaminan" class="form-select" required>
+                    <option value="">Pilih Jaminan</option>
+                    <option value="Deposit Uang">Deposit Uang</option>
+                    <option value="Dokumen Identitas">Dokumen Identitas</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="uploadKTP" class="form-label">Unggah KTP:</label>
+                <input type="file" id="uploadKTP" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="uploadSelfie" class="form-label">Unggah Foto Selfie dengan KTP:</label>
+                <input type="file" id="uploadSelfie" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="tandaTangan" class="form-label">Tanda Tangan Digital:</label>
+                <input type="file" id="tandaTangan" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <input type="checkbox" id="syaratKetentuan" required>
+                <label for="syaratKetentuan">Saya menyetujui <a href="#">Syarat & Ketentuan</a></label>
+            </div>
+            <button type="button" class="btn btn-primary w-100" onclick="kirimData()">Kirim</button>
+        </form>
+        <p class="text-center mt-3"><a href="#" class="btn btn-info" onclick="bukaChat()">Live Chat Support</a></p>
+    </div>
+
+    <script>
+        function toggleLokasi() {
+            let lokasi = document.getElementById("lokasi").value;
+            document.getElementById("lokasiIndonesia").style.display = lokasi === "indonesia" ? "block" : "none";
+            document.getElementById("lokasiLuarNegeri").style.display = lokasi === "luar-negeri" ? "block" : "none";
+        }
+
+        function hitungBiaya() {
+            let durasi = document.getElementById("durasi").value;
+            let lokasi = document.getElementById("lokasi").value;
+            let jenisOrbit = document.getElementById("jenisOrbit").value;
+            let kuota = document.getElementById("kuota").value;
+            let biaya = 0;
+
+            // Hitung biaya berdasarkan durasi, lokasi, jenis orbit dan kuota
+            if (durasi && lokasi && jenisOrbit && kuota) {
+                // Harga dasar berdasarkan lokasi
+                if (lokasi === "indonesia") biaya = 50000;
+                if (lokasi === "luar-negeri") biaya = 100000;
+
+                // Biaya tambahan berdasarkan jenis orbit
+                if (jenisOrbit === "Orbit Pro") biaya += 20000;
+
+                // Biaya tambahan berdasarkan kuota
+                if (kuota === "30GB") biaya += 30000;
+                if (kuota === "50GB") biaya += 50000;
+
+                // Hitung biaya berdasarkan durasi
+                if (durasi === "1 Minggu") biaya *= 7;
+                if (durasi === "1 Bulan") biaya *= 30;
+            }
+
+            // Tampilkan estimasi biaya
+            document.getElementById("estimasiBiaya").value = biaya ? "Rp " + biaya.toLocaleString() : "";
+        }
+
+        function bukaChat() {
+            window.open("https://wa.me/6281234567890", "_blank");
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
