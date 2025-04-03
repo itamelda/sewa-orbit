@@ -17,6 +17,11 @@
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
             margin-top: 50px;
         }
+        .logo {
+            width: 100px; /* Sesuaikan ukuran logo */
+            display: block;
+            margin: 0 auto 20px auto;
+        }
     </style>
 </head>
 <body>
@@ -96,7 +101,18 @@
             </div>
             <button type="button" class="btn btn-primary w-100" onclick="kirimData()">Kirim</button>
         </form>
+
+        <hr>
+        <div class="text-center">
+            <a href="https://wa.me/6281235628878" class="btn btn-info w-100" target="_blank">Live Chat Support</a>
+        </div>
+        <hr>
+        <p><strong>Syarat & Ketentuan:</strong></p>
+        <p>1. Penyewa harus berusia minimal 18 tahun.</p>
+        <p>2. Biaya sewa tidak dapat dikembalikan setelah pembayaran.</p>
+        <p>3. Denda berlaku jika perangkat tidak dikembalikan tepat waktu.</p>
     </div>
+
     <script>
         function toggleLokasi() {
             let lokasi = document.getElementById("lokasi").value;
@@ -112,17 +128,22 @@
             let biaya = 0;
 
             if (durasi && lokasi && jenisOrbit && kuota) {
-                if (lokasi === "indonesia") biaya = 20000;
-                if (lokasi === "luar-negeri") biaya = 50000;
+                // Biaya dasar lebih murah
+                if (lokasi === "indonesia") biaya = 10000;  // Biaya Indonesia lebih murah
+                if (lokasi === "luar-negeri") biaya = 20000;  // Biaya Luar Negeri lebih murah
 
-                if (jenisOrbit === "Orbit Pro") biaya += 20000;
-                if (kuota === "30GB") biaya += 30000;
-                if (kuota === "50GB") biaya += 50000;
+                if (jenisOrbit === "Orbit Pro") biaya += 10000;  // Biaya tambahan Orbit Pro lebih murah
+                if (kuota === "30GB") biaya += 15000;  // Biaya tambahan kuota 30GB lebih murah
+                if (kuota === "50GB") biaya += 25000;  // Biaya tambahan kuota 50GB lebih murah
 
                 if (durasi === "1 Minggu") biaya *= 7;
                 if (durasi === "1 Bulan") biaya *= 30;
             }
             document.getElementById("estimasiBiaya").value = biaya ? "Rp " + biaya.toLocaleString() : "";
+        }
+
+        function kirimData() {
+            alert("Data berhasil dikirim. Terima kasih!");
         }
     </script>
 </body>
