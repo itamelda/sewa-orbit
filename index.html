@@ -17,20 +17,30 @@
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
             margin-top: 50px;
         }
+        .logo {
+            width: 100px;
+            display: block;
+            margin: 0 auto 20px auto;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h2 class="text-center">Sewa Orbit</h2>
         <form id="sewaForm">
+            <!-- Nama -->
             <div class="mb-3">
                 <label for="nama" class="form-label">Nama:</label>
                 <input type="text" id="nama" class="form-control" required>
             </div>
+            
+            <!-- No HP -->
             <div class="mb-3">
                 <label for="nohp" class="form-label">No. HP:</label>
                 <input type="tel" id="nohp" class="form-control" required>
             </div>
+
+            <!-- Durasi Sewa -->
             <div class="mb-3">
                 <label for="durasi" class="form-label">Durasi Sewa:</label>
                 <select id="durasi" class="form-select" required onchange="hitungBiaya()">
@@ -40,6 +50,8 @@
                     <option value="1 Bulan">1 Bulan</option>
                 </select>
             </div>
+
+            <!-- Lokasi -->
             <div class="mb-3">
                 <label for="lokasi" class="form-label">Lokasi:</label>
                 <select id="lokasi" class="form-select" required onchange="toggleLokasi(); hitungBiaya()">
@@ -48,13 +60,17 @@
                     <option value="luar-negeri">Luar Negeri</option>
                 </select>
             </div>
+            
             <div id="lokasiIndonesia" style="display: none;">
+                <!-- Kota untuk Indonesia -->
                 <div class="mb-3">
                     <label for="kota" class="form-label">Kota:</label>
                     <input type="text" id="kota" class="form-control">
                 </div>
             </div>
+            
             <div id="lokasiLuarNegeri" style="display: none;">
+                <!-- Negara untuk Luar Negeri -->
                 <div class="mb-3">
                     <label for="negara" class="form-label">Negara Tujuan:</label>
                     <select id="negara" class="form-select" required onchange="hitungBiaya()">
@@ -73,6 +89,8 @@
                     </select>
                 </div>
             </div>
+
+            <!-- Jenis Orbit -->
             <div class="mb-3">
                 <label for="jenisOrbit" class="form-label">Jenis Orbit:</label>
                 <select id="jenisOrbit" class="form-select" required onchange="hitungBiaya()">
@@ -81,6 +99,8 @@
                     <option value="Orbit Pro">Orbit Pro</option>
                 </select>
             </div>
+
+            <!-- Kuota -->
             <div class="mb-3">
                 <label for="kuota" class="form-label">Pilih Kuota:</label>
                 <select id="kuota" class="form-select" required onchange="hitungBiaya()">
@@ -90,14 +110,20 @@
                     <option value="50GB">50GB</option>
                 </select>
             </div>
+
+            <!-- Estimasi Biaya -->
             <div class="mb-3">
                 <label class="form-label">Estimasi Biaya:</label>
                 <input type="text" id="estimasiBiaya" class="form-control" disabled>
             </div>
+
+            <!-- Jaminan -->
             <div class="mb-3">
                 <label for="jaminan" class="form-label">Jaminan:</label>
                 <input type="text" id="jaminan" class="form-control">
             </div>
+
+            <!-- Upload Dokumen -->
             <div class="mb-3">
                 <label for="uploadKTP" class="form-label">Upload Foto KTP:</label>
                 <input type="file" id="uploadKTP" class="form-control" required>
@@ -110,6 +136,18 @@
                 <label for="tandaTangan" class="form-label">Upload Tanda Tangan Selfie:</label>
                 <input type="file" id="tandaTangan" class="form-control" required>
             </div>
+
+            <!-- Syarat dan Ketentuan -->
+            <div class="mb-3">
+                <input type="checkbox" id="syaratKetentuan" required>
+                <label for="syaratKetentuan">Saya setuju dengan <a href="#" target="_blank">syarat dan ketentuan</a>.</label>
+            </div>
+
+            <!-- Live Chat -->
+            <div class="mb-3">
+                <a href="https://wa.me/6281235628878" target="_blank" class="btn btn-success w-100">Live Chat</a>
+            </div>
+
             <button type="button" class="btn btn-primary w-100" onclick="kirimData()">Kirim</button>
         </form>
     </div>
@@ -156,6 +194,12 @@
             var uploadSelfie = document.getElementById("uploadSelfie").files[0].name;
             var uploadTandaTangan = document.getElementById("tandaTangan").files[0].name;
             var estimasiBiaya = document.getElementById("estimasiBiaya").value;
+            var syaratKetentuan = document.getElementById("syaratKetentuan").checked;
+
+            if (!syaratKetentuan) {
+                alert("Anda harus menyetujui syarat dan ketentuan.");
+                return;
+            }
 
             var data = {
                 nama: nama,
@@ -184,6 +228,7 @@
             .then(data => {
                 if (data.result === "success") {
                     alert("Data berhasil dikirim!");
+                    document.getElementById("sewaForm").reset();
                 } else {
                     alert("Gagal mengirim data.");
                 }
