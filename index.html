@@ -75,7 +75,7 @@
                     <label for="negara" class="form-label">Negara Tujuan:</label>
                     <select id="negara" class="form-select" required onchange="hitungBiaya()">
                         <option value="">Pilih Negara Tujuan</option>
-                        <option value="Amerika Serikat">merika Serikat</option>
+                        <option value="Amerika Serikat">Amerika Serikat</option>
                         <option value="Afghanistan">Afghanistan</option>
                         <option value="Australia">Australia</option>
                         <option value="Germany">Germany</option>
@@ -143,14 +143,29 @@
                 <input type="file" id="uploadSelfie" class="form-control" required>
             </div>
             <div class="mb-3">
-                <label for="tandaTangan" class="form-label">Upload Tanda Tangan Selfie:</label>
+                <label for="tandaTangan" class="form-label">Upload Tanda Tangan:</label>
                 <input type="file" id="tandaTangan" class="form-control" required>
             </div>
 
             <!-- Syarat dan Ketentuan -->
-            <div class="mb-3">
-                <input type="checkbox" id="syaratKetentuan" required>
-                <label for="syaratKetentuan">Saya setuju dengan <a href="#" target="_blank">syarat dan ketentuan</a>.</label>
+            <div class="modal fade" id="termsModal" tabindex="-1" aria-labelledby="termsModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="termsModalLabel">Syarat dan Ketentuan</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <ul>
+                        <li>Pengguna harus menyewa perangkat Orbit sesuai dengan durasi yang telah dipilih.</li>
+                        <li>Perangkat Orbit dapat digunakan di Indonesia dan luar negeri dengan ketentuan biaya yang berbeda.</li>
+                        <li>Pengembalian perangkat harus sesuai waktu yang disepakati.</li>
+                        <li>Biaya sewa dapat berubah berdasarkan pilihan durasi, lokasi, jenis perangkat, dan kuota.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
             </div>
 
             <!-- Live Chat -->
@@ -227,7 +242,7 @@
                 estimasiBiaya: estimasiBiaya
             };
 
-            fetch('https://script.google.com/macros/s/AKfycbyxv3QUr9AZDJVa9NB3IjrZWJym88IPPj3arBLLr34G3_62FynFhYTgOxUPvLLB4f_s/exec', {
+            fetch('https://script.google.com/macros/s/AKfycbwsKtj6nxkqZ4WluBt2C8eSjLCqUbrdGuoFM_PrpJ0o7DwK2fyDLx7C1PQfYLJHRzCt/exec', {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
