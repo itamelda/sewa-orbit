@@ -96,31 +96,24 @@
             </div>
             <div class="mb-3">
                 <label for="jaminan" class="form-label">Jaminan:</label>
-                <select id="jaminan" class="form-select" required>
-                    <option value="">Pilih Jaminan</option>
-                    <option value="Deposit Uang">Deposit Uang</option>
-                    <option value="Dokumen Identitas">Dokumen Identitas</option>
-                </select>
+                <input type="text" id="jaminan" class="form-control">
             </div>
             <div class="mb-3">
-                <label for="uploadKTP" class="form-label">Unggah KTP:</label>
+                <label for="uploadKTP" class="form-label">Upload Foto KTP:</label>
                 <input type="file" id="uploadKTP" class="form-control" required>
             </div>
             <div class="mb-3">
-                <label for="uploadSelfie" class="form-label">Unggah Foto Selfie dengan KTP:</label>
+                <label for="uploadSelfie" class="form-label">Upload Foto Selfie:</label>
                 <input type="file" id="uploadSelfie" class="form-control" required>
             </div>
             <div class="mb-3">
-                <label for="tandaTangan" class="form-label">Tanda Tangan Digital:</label>
+                <label for="tandaTangan" class="form-label">Upload Tanda Tangan Selfie:</label>
                 <input type="file" id="tandaTangan" class="form-control" required>
-            </div>
-            <div class="mb-3">
-                <input type="checkbox" id="syaratKetentuan" required>
-                <label for="syaratKetentuan">Saya menyetujui <a href="#">Syarat & Ketentuan</a></label>
             </div>
             <button type="button" class="btn btn-primary w-100" onclick="kirimData()">Kirim</button>
         </form>
     </div>
+
     <script>
         function toggleLokasi() {
             let lokasi = document.getElementById("lokasi").value;
@@ -147,6 +140,58 @@
                 if (durasi === "1 Bulan") biaya *= 30;
             }
             document.getElementById("estimasiBiaya").value = biaya ? "Rp " + biaya.toLocaleString() : "";
+        }
+
+        function kirimData() {
+            var nama = document.getElementById("nama").value;
+            var nohp = document.getElementById("nohp").value;
+            var durasi = document.getElementById("durasi").value;
+            var lokasi = document.getElementById("lokasi").value;
+            var kota = document.getElementById("kota").value;
+            var negara = document.getElementById("negara").value;
+            var jenisOrbit = document.getElementById("jenisOrbit").value;
+            var kuota = document.getElementById("kuota").value;
+            var jaminan = document.getElementById("jaminan").value;
+            var uploadKTP = document.getElementById("uploadKTP").files[0].name;
+            var uploadSelfie = document.getElementById("uploadSelfie").files[0].name;
+            var uploadTandaTangan = document.getElementById("tandaTangan").files[0].name;
+            var estimasiBiaya = document.getElementById("estimasiBiaya").value;
+
+            var data = {
+                nama: nama,
+                nohp: nohp,
+                durasi: durasi,
+                lokasi: lokasi,
+                kota: kota,
+                negara: negara,
+                jenisOrbit: jenisOrbit,
+                kuota: kuota,
+                jaminan: jaminan,
+                uploadKTP: uploadKTP,
+                uploadSelfie: uploadSelfie,
+                uploadTandaTangan: uploadTandaTangan,
+                estimasiBiaya: estimasiBiaya
+            };
+
+            fetch("https://script.google.com/macros/s/AKfycbzj9_1EnRxsBH8SJ8isAKBye_TaHFqFamI7wjeHkH0KtKj-tYrl0ZJFSiwNC8l77V36/exec", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.result === "success") {
+                    alert("Data berhasil dikirim!");
+                } else {
+                    alert("Gagal mengirim data.");
+                }
+            })
+            .catch(error => {
+                alert("Terjadi kesalahan.");
+                console.error(error);
+            });
         }
     </script>
 </body>
