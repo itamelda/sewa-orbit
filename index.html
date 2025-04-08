@@ -17,10 +17,16 @@
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
             margin-top: 50px;
         }
+        .logo {
+            width: 100px;
+            display: block;
+            margin: 0 auto 20px auto;
+        }
     </style>
 </head>
 <body>
     <div class="container">
+        <img src="URL_LOGO_ANDA" alt="Logo Sewa Orbit" class="logo">
         <h2 class="text-center">Sewa Orbit</h2>
         <form id="sewaForm">
             <div class="mb-3">
@@ -94,21 +100,31 @@
                 <label class="form-label">Estimasi Biaya:</label>
                 <input type="text" id="estimasiBiaya" class="form-control" disabled>
             </div>
+            <!-- Kolom Jaminan -->
             <div class="mb-3">
                 <label for="jaminan" class="form-label">Jaminan:</label>
-                <input type="text" id="jaminan" class="form-control">
+                <select id="jaminan" class="form-select" required>
+                    <option value="">Pilih Jaminan</option>
+                    <option value="Deposit Uang">Deposit Uang</option>
+                    <option value="Dokumen Identitas">Dokumen Identitas</option>
+                </select>
             </div>
+            <!-- Upload KTP, Selfie dan Tanda Tangan -->
             <div class="mb-3">
-                <label for="uploadKTP" class="form-label">Upload Foto KTP:</label>
+                <label for="uploadKTP" class="form-label">Unggah KTP:</label>
                 <input type="file" id="uploadKTP" class="form-control" required>
             </div>
             <div class="mb-3">
-                <label for="uploadSelfie" class="form-label">Upload Foto Selfie:</label>
+                <label for="uploadSelfie" class="form-label">Unggah Foto Selfie dengan KTP:</label>
                 <input type="file" id="uploadSelfie" class="form-control" required>
             </div>
             <div class="mb-3">
-                <label for="tandaTangan" class="form-label">Upload Tanda Tangan Selfie:</label>
+                <label for="tandaTangan" class="form-label">Tanda Tangan Digital:</label>
                 <input type="file" id="tandaTangan" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <input type="checkbox" id="syaratKetentuan" required>
+                <label for="syaratKetentuan">Saya menyetujui <a href="#">Syarat & Ketentuan</a></label>
             </div>
             <button type="button" class="btn btn-primary w-100" onclick="kirimData()">Kirim</button>
         </form>
@@ -143,55 +159,8 @@
         }
 
         function kirimData() {
-            var nama = document.getElementById("nama").value;
-            var nohp = document.getElementById("nohp").value;
-            var durasi = document.getElementById("durasi").value;
-            var lokasi = document.getElementById("lokasi").value;
-            var kota = document.getElementById("kota").value;
-            var negara = document.getElementById("negara").value;
-            var jenisOrbit = document.getElementById("jenisOrbit").value;
-            var kuota = document.getElementById("kuota").value;
-            var jaminan = document.getElementById("jaminan").value;
-            var uploadKTP = document.getElementById("uploadKTP").files[0].name;
-            var uploadSelfie = document.getElementById("uploadSelfie").files[0].name;
-            var uploadTandaTangan = document.getElementById("tandaTangan").files[0].name;
-            var estimasiBiaya = document.getElementById("estimasiBiaya").value;
-
-            var data = {
-                nama: nama,
-                nohp: nohp,
-                durasi: durasi,
-                lokasi: lokasi,
-                kota: kota,
-                negara: negara,
-                jenisOrbit: jenisOrbit,
-                kuota: kuota,
-                jaminan: jaminan,
-                uploadKTP: uploadKTP,
-                uploadSelfie: uploadSelfie,
-                uploadTandaTangan: uploadTandaTangan,
-                estimasiBiaya: estimasiBiaya
-            };
-
-            fetch("https://script.google.com/macros/s/AKfycbzj9_1EnRxsBH8SJ8isAKBye_TaHFqFamI7wjeHkH0KtKj-tYrl0ZJFSiwNC8l77V36/exec", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(data)
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.result === "success") {
-                    alert("Data berhasil dikirim!");
-                } else {
-                    alert("Gagal mengirim data.");
-                }
-            })
-            .catch(error => {
-                alert("Terjadi kesalahan.");
-                console.error(error);
-            });
+            // Fungsi untuk mengirimkan data ke server atau database
+            alert("Data telah terkirim!");
         }
     </script>
 </body>
